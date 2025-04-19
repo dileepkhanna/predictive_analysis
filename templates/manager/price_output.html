@@ -1,0 +1,35 @@
+{% extends 'manager/manager_base.html' %}
+{% block content %}
+<div class="container">
+	<h2>Lab Details</h2>
+	<br>
+	{% if ob %}
+	<table class="table table-bordered table-hover">
+	   <thead style="background-color: #FCF8E8; color: black;">
+	   	  <tr>
+<!--			  <th>Id</th>-->
+			 <th>Building Type</th>
+			 <th>Soil Type</th>
+			 <th>Soil Condition</th>
+			 <th>Foundation</th>
+             <th>Analyse</th>
+          </tr>
+	   </thead>
+	   <tbody style="background-color: #94B49F; color: black;">
+		{% for i in ob %}
+		  <tr>
+<!--			  <td>{{ i.id }}</td>-->
+             <td>{{ i.building_type }}</td>
+			 <td>{{ i.soil_type }}</td>
+			 <td>{{ i.soil_condition }}</td>
+			 <td>{{ i.foundation }}</td>
+			 <td><a href="/apply_algorithm/{{ i.id }}/"><input type="button" style="background-color: #DF7861; color: black;" value="Analyse"></a></td>
+		  </tr>
+	   {% endfor %}
+	   </tbody>
+	</table>
+	{% else %}
+	<h3>No More Updated Customer Form to Send</h3>
+	{% endif %}
+</div>
+{% endblock %}

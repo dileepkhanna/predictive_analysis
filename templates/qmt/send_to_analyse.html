@@ -1,0 +1,41 @@
+{% extends 'qmt/qmt_base.html' %}
+{% block content %}
+<div class="container">
+	<h2>Customer Details</h2>
+	<br>
+	{% if ob %}
+	<table class="table table-bordered table-hover">
+	   <thead style="background-color: #FCF8E8; color: black;">
+	   	  <tr>
+<!--			  <th>Id</th>-->
+			 <th>Cement</th>
+			 <th>Sand</th>
+			 <th>Aggregate</th>
+			 <th>Steel</th>
+			 <th>Paint</th>
+			 <th>Bricks</th>
+			 <th>Tiles</th>
+			 <th>Send</th>
+		  </tr>
+	   </thead>
+	   <tbody style="background-color: #94B49F; color: black;">
+		{% for i in ob %}
+		  <tr>
+<!--			  <td>{{ i.id }}</td>-->
+			 <td>{{ i.cement }}</td>
+			 <td>{{ i.sand }}</td>
+			 <td>{{ i.aggregate }}</td>
+			 <td>{{ i.steel }}</td>
+			 <td>{{ i.paint }}</td>
+			 <td>{{ i.bricks }}</td>
+			 <td>{{ i.tiles }}</td>
+			 <td><a href="/click_to_send/{{ i.id }}/"><input type="button" style="background-color: #DF7861; color: black;" value="To Analyse"></a></td>
+		  </tr>
+	   {% endfor %}
+	   </tbody>
+	</table>
+	{% else %}
+	<h3>No More Material Details</h3>
+	{% endif %}
+</div>
+{% endblock %}

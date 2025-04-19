@@ -1,0 +1,45 @@
+{% extends 'manager/manager_base.html' %}
+{% block content %}
+<div class="container">
+	<h2>Lab Details</h2>
+	<br>
+	{% if ob %}
+	<table class="table table-bordered table-hover">
+	   <thead style="background-color: #FCF8E8; color: black;">
+	   	  <tr>
+<!--			  <th>Id</th>-->
+			 <th>Customer Name</th>
+			 <th>Customer Mail</th>
+			 <th>Contact</th>
+			 <th>Building Type</th>
+			 <th>Land Area</th>
+			 <th>Soil Type</th>
+			 <th>Soil Condition</th>
+			 <th>Foundation</th>
+			 <th>Water</th>
+			 <th>Send</th>
+		  </tr>
+	   </thead>
+	   <tbody style="background-color: #94B49F; color: black;">
+		{% for i in ob %}
+		  <tr>
+<!--			  <td>{{ i.id }}</td>-->
+			 <td>{{ i.customer_name }}</td>
+			 <td>{{ i.customer_email }}</td>
+			 <td>{{ i.contact }}</td>
+			 <td>{{ i.building_type }}</td>
+			 <td>{{ i.land_area }}</td>
+			 <td>{{ i.soil_type }}</td>
+			 <td>{{ i.soil_condition }}</td>
+			 <td>{{ i.foundation }}</td>
+			 <td>{{ i.water }}</td>
+			 <td><a href="/send_customer/{{ i.id }}/"><input type="button" style="background-color: #DF7861; color: black;" value="To Customer"></a></td>
+		  </tr>
+	   {% endfor %}
+	   </tbody>
+	</table>
+	{% else %}
+	<h3>No More Updated Customer Form to Send</h3>
+	{% endif %}
+</div>
+{% endblock %}

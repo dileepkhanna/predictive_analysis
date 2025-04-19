@@ -1,0 +1,37 @@
+Building Type,Soil Type,Condition,Foundation,Cost
+Residential,Sandy Soil,Good,Deep,Premium
+Educational Building,Clay Soil,Moderate,Medium,Moderate
+Institutional Building,Granite or Rocky Soil,Excellent,Low,Budget
+Business Building,Chalk and Lime Stone Soil,Good,Deep,Premium
+Storage Building,Gravelly Soil,Excellent,Low,Budget
+Multi-Storey or High Raise Building,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Residential,Clay Soil,Moderate,Medium,Moderate
+Educational Building,Granite or Rocky Soil,Excellent,Low,Budget
+Institutional Building,Chalk and Lime Stone Soil,Good,Deep,Premium
+Business Building,Gravelly Soil,Excellent,Low,Budget
+Storage Building,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Multi-Storey or High Raise Building,Sandy Soil,Good,Deep,Premium
+Residential,Granite or Rocky Soil,Excellent,Low,Budget
+Educational Building,Chalk and Lime Stone Soil,Good,Deep,Premium
+Institutional Building,Gravelly Soil,Excellent,Low,Budget
+Business Building,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Storage Building,Sandy Soil,Good,Deep,Premium
+Multi-Storey or High Raise Building,Clay Soil,Moderate,Medium,Moderate
+Residential,Chalk and Lime Stone Soil,Good,Deep,Premium
+Educational Building,Gravelly Soil,Excellent,Low,Budget
+Institutional Building,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Business Building,Sandy Soil,Good,Deep,Premium
+Storage Building,Clay Soil,Moderate,Medium,Moderate
+Multi-Storey or High Raise Building,Granite or Rocky Soil,Excellent,Low,Budget
+Residential,Gravelly Soil,Excellent,Low,Budget
+Educational Building,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Institutional Building,Sandy Soil,Good,Deep,Premium
+Business Building,Clay Soil,Moderate,Medium,Moderate
+Storage Building,Granite or Rocky Soil,Excellent,Low,Budget
+Multi-Storey or High Raise Building,Chalk and Lime Stone Soil,Good,Deep,Premium
+Residential,Filled or Made Soil,Not Suitable,Not Allowed,Nill
+Educational Building,Sandy Soil,Good,Deep,Premium
+Institutional Building,Clay Soil,Moderate,Medium,Moderate
+Business Building,Granite or Rocky Soil,Excellent,Low,Budget
+Storage Building,Chalk and Lime Stone Soil,Good,Deep,Premium
+Multi-Storey or High Raise Building,Gravelly Soil,Excellent,Low,Budget

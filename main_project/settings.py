@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-j=o5u%a*w-t#+qs)#mh@2p&w7wq0u@6vt*+#ub=q2&nff+42j2
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
-ALLOWED_HOSTS = ['your-service-name.onrender.com']
+DEBUG = True
+ALLOWED_HOSTS = ['your-service-name.render.com']
+#ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -80,28 +81,13 @@ WSGI_APPLICATION = 'main_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'predictive_analysis',
-#         'USER': 'root',
-#         'PASSWORD': '9948318650',
-#     }
-# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("predictive_analysis"),
-        'USER': os.getenv("root"),
-        'PASSWORD': os.getenv("9948318650"),
-        'HOST': os.getenv("localhost"),
-
+        'NAME': 'predictive_analysis',
+        'USER': 'root',
+        'PASSWORD': '9948318650',
     }
 }
 

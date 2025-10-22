@@ -13,19 +13,27 @@ git commit -m "Prepare for Railway deployment with Docker"
 git push origin main
 ```
 
-### 2. Create Railway Project
+### 2. Test Docker Build Locally (Optional but Recommended)
+```bash
+# Test the Docker build
+chmod +x test-docker.sh
+./test-docker.sh
+```
+
+### 3. Create Railway Project
 1. Go to [railway.app](https://railway.app)
 2. Click "Start a New Project"
 3. Select "Deploy from GitHub repo"
 4. Choose your repository
-5. Railway will automatically detect the Dockerfile and use Docker for deployment
+5. Railway will automatically detect the Dockerfile
+6. **Important**: If Railway tries to use Nixpacks, go to Settings → Environment and set `RAILWAY_DOCKERFILE_PATH=Dockerfile`
 
-### 3. Add MySQL Database
+### 4. Add MySQL Database
 1. In your Railway project dashboard
 2. Click "New" → "Database" → "Add MySQL"
 3. Railway will automatically create a MySQL instance
 
-### 4. Set Environment Variables
+### 5. Set Environment Variables
 In Railway dashboard, go to your service → Variables tab and add:
 
 **Required Variables:**
@@ -37,11 +45,11 @@ In Railway dashboard, go to your service → Variables tab and add:
 - `EMAIL_HOST_USER`: Your Gmail address
 - `EMAIL_HOST_PASSWORD`: Your Gmail app password
 
-### 5. Database Connection
+### 6. Database Connection
 Railway automatically provides `DATABASE_URL` when you add MySQL addon.
 Your app is already configured to use this.
 
-### 6. Deploy
+### 7. Deploy
 Railway will automatically deploy when you push to your connected branch.
 
 ## Important Notes
@@ -92,3 +100,35 @@ DB_PORT=3306
 - Set up alerts for downtime
 
 Your Django app with ML capabilities should now be live on Railway!
+## Force 
+Docker Build on Railway
+
+If Railway still tries to use Nixpacks instead of Docker:
+
+1. **Method 1**: Set environment variable in Railway dashboard:
+   - Go to your service → Variables
+   - Add: `RAILWAY_DOCKERFILE_PATH=Dockerfile`
+
+2. **Method 2**: Delete and recreate the service:
+   - Remove the current service
+   - Create new service from GitHub repo
+   - Ensure only Dockerfile exists (no Procfile, nixpacks.toml, etc.)
+
+3. **Method 3**: Use Railway CLI:
+   ```bash
+   npm install -g @railway/cli
+   railway login
+   railway link
+   railway up --detach
+   ```
+
+## Alternative: Manual Docker Deployment
+
+If Railway continues to have issues, you can deploy to other platforms:
+
+- **DigitalOcean App Platform**: Supports Dockerfile directly
+- **Google Cloud Run**: Excellent for containerized Django apps
+- **AWS App Runner**: Simple container deployment
+- **Render**: Similar to Railway with good Docker support
+
+All these platforms will work with your Dockerfile without modification.

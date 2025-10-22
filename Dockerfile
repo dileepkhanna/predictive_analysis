@@ -29,8 +29,8 @@ WORKDIR /app
 
 # Install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . .

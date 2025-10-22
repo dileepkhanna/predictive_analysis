@@ -9,7 +9,7 @@
 ### 1. Push your code to GitHub
 ```bash
 git add .
-git commit -m "Prepare for Railway deployment"
+git commit -m "Prepare for Railway deployment with Docker"
 git push origin main
 ```
 
@@ -18,6 +18,7 @@ git push origin main
 2. Click "Start a New Project"
 3. Select "Deploy from GitHub repo"
 4. Choose your repository
+5. Railway will automatically detect the Dockerfile and use Docker for deployment
 
 ### 3. Add MySQL Database
 1. In your Railway project dashboard
@@ -73,7 +74,8 @@ DB_PORT=3306
 ### Build Fails
 - Check the build logs in Railway dashboard
 - Ensure all dependencies are in requirements.txt
-- Verify Python version in runtime.txt
+- Docker build may take 10-15 minutes due to ML dependencies (TensorFlow, OpenCV)
+- If build times out, try deploying again - Railway has generous build timeouts
 
 ### Database Connection Issues
 - Ensure MySQL addon is added to your project

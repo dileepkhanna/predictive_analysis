@@ -16,18 +16,21 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j=o5u%a*w-t#+qs)#mh@2p&w7wq0u@6vt*+#ub=q2&nff+42j2'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-j=o5u%a*w-t#+qs)#mh@2p&w7wq0u@6vt*+#ub=q2&nff+42j2')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-DEBUG = True
-ALLOWED_HOSTS = ['your-service-name.render.com']
-#ALLOWED_HOSTS = []
+# Railway deployment
+RAILWAY_ENVIRONMENT = os.environ.get('RAILWAY_ENVIRONMENT')
+if RAILWAY_ENVIRONMENT:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -82,14 +85,25 @@ WSGI_APPLICATION = 'main_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'predictive_analysis',
-        'USER': 'root',
-        'PASSWORD': '9948318650',
+# Database configuration
+if 'DATABASE_URL' in os.environ:
+    # Railway MySQL addon provides DATABASE_URL
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    # Local development database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('DB_NAME', 'predictive_analysis'),
+            'USER': os.environ.get('DB_USER', 'root'),
+            'PASSWORD': os.environ.get('DB_PASSWORD', '9948318650'),
+            'HOST': os.environ.get('DB_HOST', 'localhost'),
+            'PORT': os.environ.get('DB_PORT', '3306'),
+        }
+    }
 
 
 # Password validation
@@ -127,9 +141,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static')
 ]
+
+# Railway static files handling
+if RAILWAY_ENVIRONMENT:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

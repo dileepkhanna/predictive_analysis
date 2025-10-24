@@ -85,25 +85,13 @@ WSGI_APPLICATION = 'main_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# Database configuration
-if 'DATABASE_URL' in os.environ:
-    # Railway MySQL addon provides DATABASE_URL
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# Database configuration - SQLite
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # Local development database
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('DB_NAME', 'predictive_analysis'),
-            'USER': os.environ.get('DB_USER', 'root'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', '9948318650'),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', '3306'),
-        }
-    }
+}
 
 
 # Password validation
@@ -150,10 +138,11 @@ STATICFILES_DIRS = [
 if RAILWAY_ENVIRONMENT:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+# Email Configuration
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "dileeplekkala23@gmail.com"
-EMAIL_HOST_PASSWORD = "vyoglyupukxzfabn"
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'dileeplekkala14@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'yrhhsukcqcogphgz')
 EMAIL_USE_TLS = True
 
 # Default primary key field type

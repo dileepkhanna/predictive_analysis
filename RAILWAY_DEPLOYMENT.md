@@ -28,10 +28,12 @@ chmod +x test-docker.sh
 5. Railway will automatically detect the Dockerfile
 6. **Important**: If Railway tries to use Nixpacks, go to Settings → Environment and set `RAILWAY_DOCKERFILE_PATH=Dockerfile`
 
-### 4. Add MySQL Database
-1. In your Railway project dashboard
-2. Click "New" → "Database" → "Add MySQL"
-3. Railway will automatically create a MySQL instance
+### 4. Database Configuration
+**Using SQLite** - No separate database service needed!
+- ✅ SQLite database is built into the deployment
+- ✅ No additional database addon required
+- ✅ Simpler and faster deployment
+- ⚠️ Note: For high-traffic production apps, consider PostgreSQL
 
 ### 5. Set Environment Variables
 In Railway dashboard, go to your service → Variables tab and add:
@@ -39,15 +41,13 @@ In Railway dashboard, go to your service → Variables tab and add:
 **Required Variables:**
 - `SECRET_KEY`: Generate a new Django secret key
 - `DEBUG`: Set to `false` for production
-- `DJANGO_SETTINGS_MODULE`: Set to `main_project.settings`
 
-**Email Variables (if using email features):**
-- `EMAIL_HOST_USER`: Your Gmail address
-- `EMAIL_HOST_PASSWORD`: Your Gmail app password
+**Email Variables:**
+- `EMAIL_HOST_USER`: dileeplekkala14@gmail.com
+- `EMAIL_HOST_PASSWORD`: yrhhsukcqcogphgz
 
-### 6. Database Connection
-Railway automatically provides `DATABASE_URL` when you add MySQL addon.
-Your app is already configured to use this.
+### 6. Deploy
+Railway will automatically deploy when you push to your connected branch.
 
 ### 7. Deploy
 Railway will automatically deploy when you push to your connected branch.

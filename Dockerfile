@@ -8,8 +8,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    pkg-config \
-    default-libmysqlclient-dev \
     build-essential \
     gcc \
     g++ \
@@ -34,6 +32,9 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 # Copy project
 COPY . .
+
+# Create directory for SQLite database
+RUN mkdir -p /app/data
 
 # Collect static files
 RUN python manage.py collectstatic --noinput --clear

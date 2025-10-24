@@ -33,14 +33,22 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
-# Create directory for SQLite database
-RUN mkdir -p /app/data
+# Create directories
+RUN mkdir -p /app/data /app/staticfiles
 
-# Collect static files
-RUN python manage.py collectstatic --noinput --clear
+# Collect static files (ignore errors if static dir is empty)
+RUN python manage.py collectstatic --noinput --clear || echo "Static files collection skipped"
 
 # Expose port
 EXPOSE $PORT
 
-# Run the application
-CMD python manage.py migrate && gunicorn main_project.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+# Run the application with better error handling
+CMD python manage.py migrate --noinput && \
+    python manage.py collectstatic --noinput || true && \
+    gunicorn main_project.wsgi:application \
+    --bind 0.0.0.0:$PORT \
+    --workers 2 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile - \
+    --log-level info

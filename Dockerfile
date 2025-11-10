@@ -42,13 +42,19 @@ RUN python manage.py collectstatic --noinput --clear || echo "Static files colle
 # Expose port (Railway automatically sets PORT at runtime)
 EXPOSE 8000
 
-# Run the application with better error handling
-CMD python manage.py migrate --noinput && \
-    python manage.py collectstatic --noinput || true && \
+# Run the application with better error handling and PORT fallback
+CMD PORT=${PORT:-8000} && \
+    echo "Starting application on port $PORT" && \
+    python manage.py migrate --noinput && \
+    python manage.py collectstatic --noinput --clear || true && \
     gunicorn main_project.wsgi:application \
     --bind 0.0.0.0:$PORT \
     --workers 2 \
-    --timeout 120 \
+    --threads 4 \
+    --timeout 0 \
+    --keep-alive 5 \
     --access-logfile - \
     --error-logfile - \
-    --log-level info
+    --log-level debug \
+    --capture-output \
+    --enable-stdio-inheritance

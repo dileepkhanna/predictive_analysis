@@ -26,11 +26,17 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-j=o5u%a*w-t#+qs)#mh@2
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
 # Railway deployment
+# Allow all hosts in production, specific hosts in development
 RAILWAY_ENVIRONMENT = os.environ.get('RAILWAY_ENVIRONMENT')
-if RAILWAY_ENVIRONMENT:
+RAILWAY_PUBLIC_DOMAIN = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
+
+if RAILWAY_ENVIRONMENT or not DEBUG:
+    # In production or Railway environment, allow all hosts
     ALLOWED_HOSTS = ['*']
+elif RAILWAY_PUBLIC_DOMAIN:
+    ALLOWED_HOSTS = [RAILWAY_PUBLIC_DOMAIN, 'localhost', '127.0.0.1']
 else:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']  # Changed from [] to ['*'] to prevent 502 errors
 
 
 # Application definition
@@ -136,9 +142,10 @@ STATICFILES_DIRS = [
 ]
 
 # WhiteNoise configuration for static files
+# Using CompressedStaticFilesStorage instead of Manifest version to avoid 502 errors
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 

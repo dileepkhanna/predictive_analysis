@@ -135,15 +135,12 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, 'static')
 ]
 
-# WhiteNoise configuration for static files
+# WhiteNoise configuration for static files (Django 4.2+)
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# For older Django versions compatibility
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Email Configuration
 EMAIL_HOST = 'smtp.gmail.com'

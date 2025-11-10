@@ -39,8 +39,8 @@ RUN mkdir -p /app/data /app/staticfiles
 # Collect static files (ignore errors if static dir is empty)
 RUN python manage.py collectstatic --noinput --clear || echo "Static files collection skipped"
 
-# Expose port
-EXPOSE $PORT
+# Expose port (Railway automatically sets PORT at runtime)
+EXPOSE 8000
 
 # Run the application with better error handling
 CMD python manage.py migrate --noinput && \
